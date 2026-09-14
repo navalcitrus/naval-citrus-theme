@@ -1,0 +1,13 @@
+{{ define "main" }}
+<section>
+  <ul class="dirlist">
+    {{- $pages := .Site.Sections -}}
+    {{- range .Site.Taxonomies -}}
+    {{- with .Page -}}
+    {{- $pages = $pages | append . -}}
+    {{- end -}}
+    {{- end }}
+    {{ partial "dirlist.html" $pages }}
+  </ul>
+</section>
+{{ end }}

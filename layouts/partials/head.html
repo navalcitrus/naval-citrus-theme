@@ -1,0 +1,56 @@
+<head>
+  <meta charset="utf-8" />
+  {{ with .Site.Language.Params.htmlCode | default .Site.LanguageCode -}}
+  <meta http-equiv="content-language" content="{{ . }}" />
+  {{- end }}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  {{ with .Site.Params.favicon -}}
+  <link rel="icon" type="image/png" href="{{ . }}" />
+  {{- end }}
+
+  {{ if .IsHome }}
+  <title>{{ .Site.Title }}</title>
+  <meta name="title" content="{{ .Site.Title }}" />
+  <meta name="description" content="{{ with .Site.Params.description }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}" />
+  {{ else }}
+  <title>{{- block "title" . }}{{ with .Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{- end }}</title>
+  <meta name="title" content="{{ with .Title }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}" />
+  <meta name="description"
+    content="{{ with .Description }}{{ . }}{{ else }}{{ with .Title }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}{{ end }}" />
+  {{ end }}
+
+  <meta name="referrer" content="no-referrer" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'" />
+
+  {{- /* Bundle all stylesheets (brand, base, syntax, and any per-site extras) into one fingerprinted file. */ -}}
+  {{- $brand := resources.Get "css/brand.css" -}}
+  {{- $style := resources.Get "css/style.css" -}}
+  {{- $syntax := resources.Get "css/syntax.css" -}}
+  {{- $styles := slice -}}
+  {{- with $brand }}{{ $styles = $styles | append . }}{{ end -}}
+  {{- with $style }}{{ $styles = $styles | append . }}{{ end -}}
+  {{- with $syntax }}{{ $styles = $styles | append . }}{{ end -}}
+  {{- /* Site-specific */ -}}
+  {{- range .Site.Params.extraStyles -}}
+  {{- with resources.Get . -}}
+  {{- $styles = $styles | append . -}}
+  {{- end -}}
+  {{- end -}}
+
+  {{- $bundleName := default "css/site-bundle.css" .Site.Params.cssBundleName -}}
+  {{- $cssPackage := $styles | resources.Concat $bundleName | resources.Fingerprint "sha256" -}}
+  <link type="text/css" rel="stylesheet" href="{{ $cssPackage.RelPermalink }}"
+    integrity="{{ $cssPackage.Data.Integrity }}" />
+
+  {{- if templates.Exists "partials/head-extra.html" -}}
+  {{- partial "head-extra.html" . -}}
+  {{- end -}}
+
+  {{- with .OutputFormats.Get "rss" }}
+  {{ printf `
+  <link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .RelPermalink $.Site.Title |
+  safeHTML }}
+  {{- end }}
+</head>

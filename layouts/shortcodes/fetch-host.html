@@ -1,0 +1,6 @@
+{{- /* Usage:
+{{<fetch-host "Display Name">}} -> wrap the given text
+    {{<fetch-host>}} -> fall back to Site.Params.fetchHost */ -}}
+        {{- $text := .Get 0 -}}
+        {{- if not $text -}}{{- $text = default "abyss" .Site.Params.fetchHost -}}{{- end -}}
+        <span class="fetch-host">{{ $text }}</span>

@@ -1,0 +1,368 @@
+/* ===== Start of style.css ===== */
+main {
+    padding-bottom: 2.5rem;
+}
+
+/* Top-of-body site header. */
+body>header {
+    padding-top: 56px;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+}
+
+footer {
+    width: 100%;
+    font-size: 10px;
+    padding-bottom: 1.5rem;
+    opacity: 0.8;
+}
+
+mark {
+    background-color: var(--highlight-color);
+    color: var(--main-title-color);
+    padding: 0.1em 0.2em;
+}
+
+/* ===== Article Styling ===== */
+article {
+    background: var(--color-deep);
+    border: 1px solid var(--color-surface);
+    border-radius: 2px;
+    box-shadow: 0 0 15px var(--shadow-color);
+    padding: 1.5rem;
+}
+
+
+article p+p {
+    margin-top: 1.5rem;
+}
+
+/* ===== Typography ===== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--main-header-color);
+}
+
+
+.post-title {
+    font-weight: 500;
+    margin: 0 0 1rem;
+    color: var(--main-title-color);
+}
+
+/* Meta strip under a post title. */
+.post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.85rem;
+    margin: 0 0 1.7rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px dotted var(--color-mid);
+    font-size: 0.8rem;
+}
+
+.post-meta .published-on {
+    font-style: italic;
+    color: var(--main-link-visited-color);
+    opacity: 0.85;
+}
+
+.post-meta>ul.post-tags,
+.post-meta>ul.post-categories {
+    margin-left: auto;
+    float: none;
+}
+
+.post-title::after {
+    content: "_";
+    opacity: 0;
+    animation: cursor-blink 2.5s infinite;
+    will-change: opacity;
+}
+
+@keyframes cursor-blink {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ===== Navigation ===== */
+hr {
+    border-style: dotted none none;
+    border-width: 2px;
+    border-color: var(--color-mid);
+}
+
+nav {
+    vertical-align: bottom;
+}
+
+nav ol {
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav ol li {
+    display: inline;
+}
+
+nav ol li:not(:last-child)::after {
+    content: "/";
+    color: var(--main-text-color);
+    opacity: 0.6;
+}
+
+.dirlist {
+    list-style: none;
+}
+
+.dirlist li::before {
+    content: '';
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+    height: 1em;
+    width: 1em;
+    position: absolute;
+    margin-left: -1.5em;
+    margin-top: 0.2em;
+}
+
+.dirlist-home::before {
+    background-image: url("/images/home.svg");
+}
+
+.dirlist-page::before {
+    background-image: url("/images/document.svg");
+}
+
+.dirlist-parent::before {
+    background-image: url("/images/undo.svg");
+}
+
+.dirlist-section::before,
+.dirlist-taxonomy::before {
+    background-image: url("/images/folder.svg");
+}
+
+.dirlist-term::before {
+    background-image: url("/images/tag.svg");
+}
+
+/* ===== Utility Classes ===== */
+.float-right {
+    float: right;
+}
+
+.hidden {
+    display: none;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+
+/* ===== Tags ===== */
+ul.post-tags,
+ul.post-categories {
+    float: right;
+    margin: 0;
+    padding: 0;
+}
+
+.post-tags li,
+.post-categories li {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    margin-left: 0.3rem;
+    font-size: 0.8rem;
+}
+
+/* ===== Media Elements ===== */
+img,
+picture,
+video {
+    height: auto;
+    max-width: 100%;
+    display: block;
+    margin: 1.5rem auto;
+    border-radius: 2px;
+}
+
+img {
+    object-fit: contain;
+    box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+/* ===== Code & Pre Elements ===== */
+pre {
+    border: 1px solid var(--color-surface);
+    border-radius: 3px;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    position: relative;
+    box-shadow: 0 0 12px var(--shadow-color);
+}
+
+li code {
+    vertical-align: middle;
+}
+
+/* ===== Tables ===== */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    display: block;
+}
+
+th {
+    background-color: var(--color-deep);
+    color: var(--main-title-color);
+    font-weight: 500;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-bottom: 2px solid var(--color-surface);
+}
+
+td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid rgba(29, 138, 165, 0.2)
+        /*--color-surface*/
+    ;
+    vertical-align: top;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(12, 52, 68, 0.3)
+        /*--color-deep*/
+    ;
+}
+
+tr:hover {
+    background-color: rgba(29, 157, 192, 0.1)
+        /*--main-header-color*/
+    ;
+}
+
+/* ===== Block Quotes ===== */
+blockquote {
+    border-left: 3px solid var(--color-surface);
+    margin: 1.5rem 0;
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    font-style: italic;
+    color: var(--main-text-color);
+    opacity: 0.9;
+    background-color: rgba(12, 52, 68, 0.3)
+        /*--color-deep*/
+    ;
+}
+
+blockquote cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--main-link-visited-color);
+    font-style: normal;
+}
+
+/* ===== Useful Container ===== */
+.panel {
+    background: var(--color-deep);
+    border: 1px solid var(--color-surface);
+    border-radius: 2px;
+    box-shadow: 0 0 15px var(--shadow-color);
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+}
+
+/* ===== 404 ===== */
+.post-title.glitch {
+    position: relative;
+}
+
+.post-title.glitch::before,
+.post-title.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.post-title.glitch::before {
+    transform: translateX(1px);
+    clip-path: inset(0 0 60% 0);
+    animation: glitch-slice 6.5s infinite;
+}
+
+.post-title.glitch::after {
+    transform: translateX(-1px);
+    clip-path: inset(50% 0 0 0);
+    animation: glitch-slice 7.2s infinite;
+}
+
+@keyframes glitch-slice {
+
+    0%,
+    92%,
+    100% {
+        opacity: 0.12;
+        transform: translateX(0);
+    }
+
+    93% {
+        opacity: 0.22;
+        transform: translateX(10px);
+    }
+
+    94% {
+        opacity: 0.10;
+        transform: translateX(-10px);
+    }
+
+    95% {
+        opacity: 0.18;
+        transform: translateX(5px);
+    }
+
+    96% {
+        opacity: 0.12;
+        transform: translateX(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .error-404::after,
+    .post-title.glitch::before,
+    .post-title.glitch::after {
+        animation: none !important;
+    }
+}
+
+/* ===== End of style.css ===== */

@@ -1,0 +1,164 @@
+/* ===== Start of brand.css ===== */
+/* ===== Color Variables ===== */
+:root {
+    --color-surface-rgb: 29 138 165;
+    --color-surface: rgb(var(--color-surface-rgb));
+    --color-mid-rgb: 16 78 99;
+    --color-mid: rgb(var(--color-mid-rgb));
+    --color-deep-rgb: 12 52 68;
+    --color-deep: rgb(var(--color-deep-rgb));
+    --color-abyss-rgb: 29 45 58;
+    --color-abyss: rgb(var(--color-abyss-rgb));
+    --main-header-color: rgb(29 157 192);
+    --main-title-color: rgb(165 225 224);
+    --main-text-color: rgb(224 244 242);
+    --main-link-unvisited-color: rgb(29 165 208);
+    --main-link-visited-color: rgb(122 156 167);
+    --main-link-hover-color: rgb(162 232 240);
+    --nav-link-color: rgb(138 207 224);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --highlight-color: rgba(38, 166, 154, 0.25);
+
+    --surface-soft: color-mix(in srgb, var(--color-surface), white 5%);
+    --abyss-soft: color-mix(in srgb, var(--color-abyss), white 5%);
+}
+
+/* ===== Accessibility & Responsiveness ===== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    body::before {
+        display: none;
+        /* Remove bubble effect */
+    }
+
+    .post-title::after {
+        opacity: 0;
+    }
+}
+
+@media screen and (max-width: 512px) {
+    html {
+        font-size: 90%;
+    }
+
+    .hidesmallscreen {
+        display: none;
+        visibility: hidden;
+        width: 0;
+        height: 0;
+    }
+}
+
+@media screen and (min-width: 513px) {
+    table {
+        display: table;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    html {
+        font-size: 110%;
+    }
+}
+
+@media screen and (min-width: 2048px) {
+    html {
+        font-size: 120%;
+    }
+}
+
+/* ===== General Layout ===== */
+body {
+    font-family: 'Fira Code', 'Courier New', monospace;
+    color: var(--main-text-color);
+    text-align: left;
+    letter-spacing: 0.03em;
+
+    background-image: linear-gradient(to bottom,
+            var(--color-surface) 0%,
+            var(--color-mid) 20%,
+            var(--color-deep) 45%,
+            var(--color-abyss) 80%);
+    background-size: 100% 600px;
+    background-repeat: repeat-x;
+    background-color: var(--color-abyss);
+
+    line-height: 1.7;
+    padding: 0 1rem;
+    margin: 0 auto;
+
+    max-width: 50rem;
+    min-height: 100vh;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+body::before {
+    /* Bubbles */
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image:
+        radial-gradient(circle at 75% 30%, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        radial-gradient(circle at 25% 61%, rgba(255, 255, 255, 0.03) 1.5px, transparent 1.5px),
+        radial-gradient(circle at 46% 82%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        radial-gradient(circle at 12% 15%, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        radial-gradient(circle at 93% 76%, rgba(255, 255, 255, 0.04) 2px, transparent 2px),
+        radial-gradient(circle at 63% 54%, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    /* Use prime numbers to reduce pattern recognition */
+    background-size: 193px 227px, 149px 151px, 211px 191px, 97px 113px, 173px 181px, 139px 163px;
+    background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.9;
+}
+
+/* ===== Links ===== */
+a {
+    color: var(--main-link-unvisited-color);
+    transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+}
+
+a.external {
+    text-decoration: none;
+    border-bottom: 1px dotted var(--main-link-unvisited-color);
+}
+
+nav a {
+    margin-right: 10px;
+    padding: 2px 4px;
+    border-radius: 2px;
+    text-decoration: none;
+    color: var(--nav-link-color);
+}
+
+a:not(nav a):visited {
+    color: var(--main-link-visited-color);
+}
+
+a:not(nav a):visited.external {
+    text-decoration: none;
+    border-bottom: 1px dotted var(--main-link-unvisited-color);
+}
+
+a:not(nav a):hover {
+    color: var(--main-link-hover-color);
+}
+
+/* ===== Images ===== */
+img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--color-surface);
+    border-radius: 2px;
+    box-shadow: 0 0 12px var(--shadow-color);
+}
+
+/* ===== End of brand.css ===== */

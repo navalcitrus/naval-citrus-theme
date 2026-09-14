@@ -1,0 +1,14 @@
+{{ define "main" }}
+<section>
+  <ul class="dirlist">
+    {{- with .Parent }}
+    <li class="dirlist-parent"><a title="{{ .Title }}" href="{{ .Permalink }}" rel="noreferrer">..</a></li>
+    {{- end }}
+    {{- with .Pages.ByLinkTitle }}
+    {{ partial "dirlist.html" . }}
+    {{- else }}
+    <li>no posts</li>
+    {{- end }}
+  </ul>
+</section>
+{{ end }}

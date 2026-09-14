@@ -1,0 +1,7 @@
+{{- /* Usage:
+{{<fetch-user "Display Name">}} -> wrap the given text
+    {{<fetch-user>}} -> fall back to Site.Params.fetchUser
+        (or lowercased Site.Title) */ -}}
+        {{- $text := .Get 0 -}}
+        {{- if not $text -}}{{- $text = default (lower .Site.Title) .Site.Params.fetchUser -}}{{- end -}}
+        <span class="fetch-user">{{ $text }}</span>

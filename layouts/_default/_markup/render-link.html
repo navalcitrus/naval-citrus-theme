@@ -1,0 +1,31 @@
+{{- $linkurl := .Destination -}}
+{{- $relval := "noreferrer" -}}
+{{- $targetval := "" -}}
+{{- $classval := "" -}}
+{{- if strings.HasSuffix $linkurl "#?" -}}
+{{- $relval = printf "%s %s" $relval "nofollow" -}}
+{{- $linkurl = strings.TrimSuffix $linkurl "#?" -}}
+{{- end -}}
+{{- $u := urls.Parse $linkurl -}}
+{{/* External links: open in new tab, disavow the opener, strip referrer. */}}
+{{- if and $u.IsAbs (in (slice "http" "https") (lower $u.Scheme)) -}}
+{{- $targetval = "_blank" -}}
+{{- $classval = "external" -}}
+{{- $relval = printf "%s %s" $relval "noopener" -}}
+{{- else -}}
+{{/* Obsidian-style resolution: try the path as-is, then strip a trailing .md. */}}
+{{- $path := $u.Path -}}
+{{- $p := .Page.GetPage $path -}}
+{{- if not $p -}}{{- $p = site.GetPage $path -}}{{- end -}}
+{{- if and (not $p) (strings.HasSuffix (lower $path) ".md") -}}
+{{- $path2 := strings.TrimSuffix $path ".md" -}}
+{{- $p = .Page.GetPage $path2 -}}
+{{- if not $p -}}{{- $p = site.GetPage $path2 -}}{{- end -}}
+{{- end -}}
+{{- if $p -}}
+{{- $linkurl = $p.RelPermalink -}}
+{{- with $u.RawQuery -}}{{- $linkurl = printf "%s?%s" $linkurl . -}}{{- end -}}
+{{- with $u.Fragment -}}{{- $linkurl = printf "%s#%s" $linkurl . -}}{{- end -}}
+{{- end -}}
+{{- end -}}
+<a href="{{ $linkurl | safeURL }}"{{ with .Title }} title="{{ trim . " " }}"{{ end }}{{ with $relval }} rel="{{ trim . " " }}"{{ end }}{{ with $targetval }} target="{{ trim . " " }}"{{ end }}{{ with $classval }} class="{{ trim . " " }}"{{ end }}>{{ .Text | safeHTML }}</a>

@@ -1,0 +1,33 @@
+{{ define "main" }}
+<article>
+  <h1 class="post-title glitch" data-text="404 // echoed response">404 // echoed response</h1>
+
+  <p>No route resolved; a reply arrived.</p>
+
+  <pre><code>$ fetch {{ "..." }}<span id="missing-path">/unknown</span>
+RX: unexpected echo
+ORIGIN: --
+STATUS: 404
+INFO: falling back to known index</code></pre>
+
+  <ul class="dirlist">
+    <li class="dirlist-home"><a href="{{ .Site.Home.RelPermalink }}">home/</a></li>
+    {{- $pages := .Site.Sections -}}
+    {{- range .Site.Taxonomies -}}
+    {{- with .Page -}}
+    {{- $pages = $pages | append . -}}
+    {{- end -}}
+    {{- end }}
+    {{ partial "dirlist.html" $pages }}
+  </ul>
+
+  {{- with first 5 .Site.RegularPages.ByDate.Reverse }}
+  <p>Past transmissions:</p>
+  <ul class="dirlist">
+    {{ partial "dirlist.html" . }}
+  </ul>
+  {{- end }}
+
+  <script src="{{ " /js/404.js" | relURL }}"></script>
+</article>
+{{ end }}

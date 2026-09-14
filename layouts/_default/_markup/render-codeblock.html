@@ -1,0 +1,4 @@
+{{- $opts := dict "codeFences" true "guessSyntax" false "noClasses" false -}}
+{{- with transform.HighlightCodeBlock . $opts -}}
+<pre class="chroma"><code>{{ .Inner }}</code></pre>
+{{- end -}}

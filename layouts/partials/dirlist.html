@@ -1,0 +1,24 @@
+{{- range . }}
+<li class="dirlist-{{ .Kind }}">
+  {{- if .IsPage }}
+  <span class="date">
+    {{- if .Date }}
+    <i>
+      <time datetime='{{ .Date.Format "2006-01-02" }}'>
+        {{ .Date.Format (default "2006-01-02" .Site.Params.dateFormat) }}
+      </time>
+    </i>
+    {{- else }}
+    <i>No Date</i>
+    {{- end }}
+  </span>
+  {{- end }}
+  {{- if .Params.link }}
+  <a href="{{ .Params.link }}" rel="noreferrer" target="_blank">{{ .Title }}</a>
+  {{- else }}
+  <a href="{{ .RelPermalink }}" rel="noreferrer">{{ with .File }}{{ .LogicalName }}{{ else }}{{ .Title }}{{ end }}</a>
+  {{- end }}
+  {{- $count := .Pages.Len }}
+  {{- if gt $count 0 }} ({{ $count }} {{ if gt $count 1 }}children{{ else }}child{{ end }}){{ end }}
+</li>
+{{- end }}

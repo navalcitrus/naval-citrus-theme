@@ -1,0 +1,277 @@
+/* ===== Start of syntax.css ===== */
+/* ===== Modified Color Variables ===== */
+:root {
+    --syntax-bg: #1D2D3A;
+    --syntax-text: #d8dee9;
+    --syntax-comment: #607D8B;
+    --syntax-comment-alt: #546E7A;
+    --syntax-keyword: #1D9DC0;
+    --syntax-string: #8ACFE0;
+    --syntax-string-special: #A2E8F0;
+    --syntax-number: #A5E1E0;
+    --syntax-function: #B9F2FF;
+    --syntax-variable: #E0F4F2;
+    --syntax-punctuation: #f5f5f5;
+    --syntax-error: #ff8a80;
+    --syntax-line-numbers: #5D8D99;
+    --syntax-line-highlight: rgba(38, 166, 154, 0.25);
+}
+
+/* PreWrapper */
+.chroma {
+    color: var(--syntax-text);
+    background-color: var(--syntax-bg);
+}
+
+/* Other */
+.chroma .x {}
+
+/* Error */
+.chroma .err {
+    color: var(--syntax-error);
+}
+
+/* CodeLine */
+.chroma .cl {}
+
+/* LineLink */
+.chroma .lnlinks {
+    outline: none;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* LineTableTD */
+.chroma .lntd {
+    vertical-align: top;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+/* LineTable */
+.chroma .lntable {
+    border-spacing: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+/* LineHighlight */
+.chroma .hl {
+    background-color: var(--syntax-line-highlight);
+}
+
+/* LineNumbersTable */
+.chroma .lnt {
+    white-space: pre;
+    -webkit-user-select: none;
+    user-select: none;
+    margin-right: 0.4em;
+    padding: 0 0.4em 0 0.4em;
+    color: var(--syntax-line-numbers);
+}
+
+/* LineNumbers */
+.chroma .ln {
+    white-space: pre;
+    -webkit-user-select: none;
+    user-select: none;
+    margin-right: 0.4em;
+    padding: 0 0.4em 0 0.4em;
+    color: var(--syntax-line-numbers);
+}
+
+/* Line */
+.chroma .line {
+    display: flex;
+}
+
+/* Keyword */
+.chroma .k,
+.chroma .kc,
+.chroma .kd,
+.chroma .kn,
+.chroma .kr {
+    color: var(--syntax-keyword);
+    font-weight: bold;
+}
+
+.chroma .kp,
+.chroma .kt {
+    color: #1D9DC0;
+}
+
+/* Names */
+.chroma .n {}
+
+.chroma .na,
+.chroma .nc,
+.chroma .no,
+.chroma .nl,
+.chroma .nn,
+.chroma .no {
+    color: #8fbcbb;
+}
+
+.chroma .nb {
+    color: var(--syntax-keyword);
+}
+
+.chroma .bp {}
+
+.chroma .nd,
+.chroma .ni {
+    color: var(--syntax-string);
+}
+
+.chroma .ne {
+    color: var(--syntax-error);
+}
+
+.chroma .nf {
+    color: var(--syntax-function);
+}
+
+.chroma .fm {}
+
+.chroma .nx {}
+
+.chroma .py {
+    color: #8fbcbb;
+}
+
+.chroma .nt {
+    color: var(--syntax-keyword);
+}
+
+.chroma .nv,
+.chroma .vc,
+.chroma .vg,
+.chroma .vi {
+    color: var(--syntax-variable);
+}
+
+.chroma .vm {}
+
+/* Literals */
+.chroma .l {}
+
+.chroma .ld {}
+
+/* Strings */
+.chroma .s,
+.chroma .sa,
+.chroma .sb,
+.chroma .sc,
+.chroma .dl,
+.chroma .s2,
+.chroma .sh,
+.chroma .si,
+.chroma .sx,
+.chroma .s1,
+.chroma .ss {
+    color: var(--syntax-string);
+}
+
+.chroma .sd {
+    color: var(--syntax-comment);
+    font-style: italic;
+}
+
+.chroma .se,
+.chroma .sr {
+    color: var(--syntax-string-special);
+}
+
+/* Numbers */
+.chroma .m,
+.chroma .mb,
+.chroma .mf,
+.chroma .mh,
+.chroma .mi,
+.chroma .il,
+.chroma .mo {
+    color: var(--syntax-number);
+}
+
+/* Operators */
+.chroma .o {
+    color: var(--syntax-keyword);
+}
+
+.chroma .ow {
+    color: var(--syntax-keyword);
+    font-weight: bold;
+}
+
+/* Punctuation */
+.chroma .p {
+    color: var(--syntax-punctuation);
+}
+
+/* Comment */
+.chroma .c,
+.chroma .ch,
+.chroma .cm,
+.chroma .c1,
+.chroma .cs {
+    color: var(--syntax-comment);
+    font-style: italic;
+}
+
+.chroma .cp,
+.chroma .cpf {
+    color: var(--syntax-comment-alt);
+    font-style: italic;
+}
+
+/* Generic */
+.chroma .g {}
+
+.chroma .gd {
+    color: var(--syntax-error);
+}
+
+.chroma .ge {
+    font-style: italic;
+}
+
+.chroma .gr {
+    color: var(--syntax-error);
+}
+
+.chroma .gh {
+    color: var(--syntax-keyword);
+    font-weight: bold;
+}
+
+.chroma .gi {
+    color: var(--syntax-string);
+}
+
+.chroma .go {}
+
+.chroma .gp {
+    color: var(--syntax-comment);
+    font-weight: bold;
+}
+
+.chroma .gs {
+    font-weight: bold;
+}
+
+.chroma .gu {
+    color: var(--syntax-keyword);
+    font-weight: bold;
+}
+
+.chroma .gt {
+    color: var(--syntax-error);
+}
+
+.chroma .gl {}
+
+.chroma .w {}
+
+/* ===== End of syntax.css ===== */

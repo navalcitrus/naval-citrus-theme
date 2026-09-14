@@ -1,0 +1,11 @@
+<header>
+  <nav>
+    <ol class="breadcrumbs">
+      Index of
+      {{- range .Ancestors.Reverse }}
+      <li><a href="{{ .RelPermalink }}" rel="noreferrer">{{ .Title }}</a></li>
+      {{- end }}
+      <li><a href="{{ .RelPermalink }}" rel="noreferrer">{{ with .File }}{{ .ContentBaseName }}.md{{ else }}{{ .Title }}{{ end }}</a></li>
+    </ol>
+  </nav>
+</header>

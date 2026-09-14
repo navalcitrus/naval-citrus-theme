@@ -1,0 +1,42 @@
+{{- $src := .Destination -}}
+{{- $alt := .PlainText -}}
+{{- $title := .Title -}}
+{{- $u := urls.Parse $src -}}
+{{- $img := "" -}}
+
+{{- if and $u.IsAbs (in (slice "http" "https") (lower $u.Scheme)) -}}
+<img src="{{ $src | safeURL }}" alt="{{ $alt }}" loading="lazy" decoding="async"{{ with $title }} title="{{ . }}"{{ end }}>
+{{- else -}}
+{{- with .Page.Resources.GetMatch $src -}}{{- $img = . -}}{{- end -}}
+{{- if not $img -}}{{- with resources.Get $src -}}{{- $img = . -}}{{- end -}}{{- end -}}
+
+{{- if $img -}}
+{{- $widths := slice 480 960 1920 -}}
+{{- $usable := slice -}}
+{{- range $widths -}}{{- if le . $img.Width -}}{{- $usable = $usable | append . -}}{{- end -}}{{- end -}}
+{{- if not $usable -}}{{- $usable = $usable | append $img.Width -}}{{- end -}}
+
+{{- $sizes := "(min-width: 50rem) 48rem, 100vw" -}}
+{{- $avif := slice -}}
+{{- $webp := slice -}}
+{{- $orig := slice -}}
+{{- range $usable -}}
+{{- $a := $img.Resize (printf "%dx q75 avif" .) -}}
+{{- $w := $img.Resize (printf "%dx q80 webp" .) -}}
+{{- $o := $img.Resize (printf "%dx q82" .) -}}
+{{- $avif = $avif | append (printf "%s %dw" $a.RelPermalink .) -}}
+{{- $webp = $webp | append (printf "%s %dw" $w.RelPermalink .) -}}
+{{- $orig = $orig | append (printf "%s %dw" $o.RelPermalink .) -}}
+{{- end -}}
+
+{{- $fallbackW := index $usable (sub (len $usable) 1) -}}
+{{- $fallback := $img.Resize (printf "%dx q82" $fallbackW) -}}
+<picture>
+<source type="image/avif" srcset="{{ delimit $avif ", " }}" sizes="{{ $sizes }}">
+<source type="image/webp" srcset="{{ delimit $webp ", " }}" sizes="{{ $sizes }}">
+<img src="{{ $fallback.RelPermalink }}" srcset="{{ delimit $orig ", " }}" sizes="{{ $sizes }}" width="{{ $fallback.Width }}" height="{{ $fallback.Height }}" alt="{{ $alt }}" loading="lazy" decoding="async"{{ with $title }} title="{{ . }}"{{ end }}>
+</picture>
+{{- else -}}
+<img src="{{ $src | safeURL }}" alt="{{ $alt }}" loading="lazy" decoding="async"{{ with $title }} title="{{ . }}"{{ end }}>
+{{- end -}}
+{{- end -}}
