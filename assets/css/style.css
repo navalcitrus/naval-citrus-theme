@@ -79,7 +79,8 @@ h6 {
     float: none;
 }
 
-.post-title::after {
+.post-title::after,
+.term-cursor::after {
     content: "_";
     opacity: 0;
     animation: cursor-blink 2.5s infinite;
@@ -222,6 +223,21 @@ pre {
 
 li code {
     vertical-align: middle;
+}
+
+/* terminal coloring for prompt-style blocks (finger, 404) */
+.term-prompt {
+    opacity: 0.75;
+}
+
+.term-key {
+    color: var(--main-header-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .term-cursor::after {
+        opacity: 1;
+    }
 }
 
 /* ===== Tables ===== */

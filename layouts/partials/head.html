@@ -21,8 +21,9 @@
   {{ end }}
 
   <meta name="referrer" content="no-referrer" />
+  {{- /* Pages embedding WebAssembly opt in with `wasm: true` in front matter. */}}
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'" />
+    content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'{{ if .Params.wasm }} 'wasm-unsafe-eval'{{ end }}; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'" />
 
   {{- /* Bundle all stylesheets (brand, base, syntax, and any per-site extras) into one fingerprinted file. */ -}}
   {{- $brand := resources.Get "css/brand.css" -}}
