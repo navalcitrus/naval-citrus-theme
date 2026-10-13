@@ -1,7 +1,7 @@
 <header>
   <nav>
+    <span class="breadcrumbs-label">Index of</span>
     <ol class="breadcrumbs">
-      Index of
       {{- range .Ancestors.Reverse }}
       <li><a href="{{ .RelPermalink }}" rel="noreferrer">{{ .Title }}</a></li>
       {{- end }}
